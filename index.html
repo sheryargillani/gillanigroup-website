@@ -45,7 +45,7 @@ header{position:sticky;top:env(safe-area-inset-top, 0px);z-index:10;background:c
 .links{display:flex;gap:22px;flex-wrap:wrap}
 .links a{color:var(--ink);text-decoration:none;font-size:.92rem;font-weight:500}
 .links a:hover{color:var(--accent)}
-@media (max-width:720px){.links{display:none}}
+
 .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:4px;font-weight:600;text-decoration:none;border:1px solid transparent;cursor:pointer;font:inherit;font-weight:600}
 .btn-primary{background:var(--accent);color:var(--accent-ink)}
 .btn-primary:hover{filter:brightness(1.08)}
@@ -148,6 +148,51 @@ textarea{min-height:110px;resize:vertical}
 footer{border-top:1px solid var(--line);padding-block:28px;font-size:.82rem;color:var(--muted)}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 @media (prefers-reduced-motion:no-preference){.btn,.links a,.copy{transition:all .15s ease}}
+
+/* ---- responsive refinements ---- */
+html,body{overflow-x:clip}
+section{scroll-margin-top:72px}
+body{overflow-wrap:break-word;-webkit-text-size-adjust:100%}
+img,svg{max-width:100%;height:auto}
+.menu-btn{display:none;width:44px;height:44px;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;background:transparent;color:var(--ink);cursor:pointer;flex:none}
+.menu-btn span,.menu-btn span::before,.menu-btn span::after{display:block;width:20px;height:2px;background:currentColor;position:relative;content:""}
+.menu-btn span::before{position:absolute;top:-6px}.menu-btn span::after{position:absolute;top:6px}
+.nav-right{display:flex;align-items:center;gap:10px}
+@media (max-width:1000px){
+  .menu-btn{display:inline-flex}
+  .links{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;gap:0;background:var(--bg);border-bottom:1px solid var(--line);padding:8px max(16px, env(safe-area-inset-right, 0px)) 16px max(16px, env(safe-area-inset-left, 0px))}
+  .links.open{display:flex}
+  .links a{padding:14px 0;border-bottom:1px solid var(--line);font-size:1rem}
+  header{position:sticky}
+  .nav{position:relative}
+}
+@media (max-width:600px){
+  .hero{padding-block:32px 32px}
+  .hero h1{font-size:clamp(1.9rem, 8.5vw, 2.6rem)}
+  .hero .lead{font-size:1.02rem}
+  .hero .cta .btn{width:100%;justify-content:center;text-align:center}
+  .nav-cta{display:none}
+  section{padding-block:44px}
+  .sec-head{margin-bottom:24px}
+  .svc{padding:20px}
+  .svc h3{font-size:1.2rem}
+  .aud-card{padding:20px}
+  .aud-card .btn{width:100%;justify-content:center}
+  form{padding:18px}
+  form .btn{width:100%;justify-content:center}
+  .corridor{padding:18px}
+  .steps{gap:22px}
+  .reg-cell{padding:14px 16px}
+  .caen div{grid-template-columns:52px 1fr;gap:4px 12px}
+  footer .wrap{flex-direction:column;gap:6px}
+}
+@media (max-width:420px){
+  .route{grid-template-columns:1fr;gap:10px}
+  .route .end[style]{text-align:left!important}
+  .route .line{height:22px;width:2px;margin-left:10px;background:repeating-linear-gradient(180deg,var(--brass) 0 6px,transparent 6px 11px)}
+  .route .line::after{right:auto;left:-4px;top:auto;bottom:-6px;border-left:5px solid transparent;border-right:5px solid transparent;border-top:8px solid var(--brass);border-bottom:0}
+  .brand span{display:none}
+}
 </style>
 
 </head>
@@ -158,14 +203,17 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <div class="mark">G</div>
       <div><b>Gillani Group</b><span>S.R.L. · ROMÂNIA</span></div>
     </a>
-    <nav class="links" aria-label="Main">
+    <nav class="links" id="mainNav" aria-label="Main">
       <a href="#services">Services</a>
       <a href="#process">How we work</a>
       <a href="#partners">Employers &amp; candidates</a>
       <a href="#company">Company</a>
       <a href="#contact">Contact</a>
     </nav>
-    <a class="btn btn-primary" href="#contact">Request staff</a>
+    <div class="nav-right">
+      <a class="btn btn-primary nav-cta" href="#contact">Request staff</a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mainNav"><span></span></button>
+    </div>
   </div>
 </header>
 
@@ -375,6 +423,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 </footer>
 
 <script>
+(function(){var b=document.getElementById("menuBtn"),n=document.getElementById("mainNav");
+b.addEventListener("click",function(){var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o);b.setAttribute("aria-label",o?"Close menu":"Open menu");});
+n.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){n.classList.remove("open");b.setAttribute("aria-expanded","false");});});})();
+
 async function copyText(text, btn){
   try{ await navigator.clipboard.writeText(text); const o=btn.textContent; btn.textContent="Copied"; setTimeout(()=>btn.textContent=o,1500); }
   catch(e){ btn.textContent="Select & copy"; }
