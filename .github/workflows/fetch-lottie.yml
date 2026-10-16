@@ -1,0 +1,33 @@
+name: fetch-lottie
+on:
+  push:
+    branches: [lottie-fetch]
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download free LottieFiles animations
+        run: |
+          mkdir -p lottie-src && cd lottie-src
+          dl(){ curl -fsSL "$2" -o "$1.lottie" && mkdir -p "$1" && unzip -o -q "$1.lottie" -d "$1"; }
+          dl airplane https://assets-v2.lottiefiles.com/a/48dfabce-1170-11ee-9e0a-b36c25b0bb22/ZwwxucjBoD.lottie
+          dl salefashion https://assets-v2.lottiefiles.com/a/fe4a4438-1189-11ee-9817-1bab2126ea2d/r1pIewoFId.lottie
+          dl hiring https://assets-v2.lottiefiles.com/a/bb1f53ee-1182-11ee-8dc7-67187547c5d2/evKhPw6Bud.lottie
+          dl recruiter https://assets-v2.lottiefiles.com/a/d2fb472c-1176-11ee-beae-abd38324605c/ZEZE1nbuhg.lottie
+          dl ecommerce https://assets-v2.lottiefiles.com/a/2682d570-1188-11ee-b934-c3505856b95a/XYwJ4wOUwI.lottie
+          dl fashiondesigner https://assets-v2.lottiefiles.com/a/d766c1ee-1188-11ee-86ea-7fe3feda0cee/RHgX2KmDsl.lottie
+          dl recruitmenthiring https://assets-v2.lottiefiles.com/a/aeab5372-117a-11ee-8c56-d346db87564e/2bdaCH8VMQ.lottie
+          dl worldmap https://assets-v2.lottiefiles.com/a/62907eb2-1171-11ee-ae02-b74772f77379/Na8eowd4s8.lottie
+          dl recruitment https://assets-v2.lottiefiles.com/a/db341700-116e-11ee-af5a-2b2dcba4a090/FG48u3tRnb.lottie
+          dl fashiongirl https://assets-v2.lottiefiles.com/a/6c905848-1166-11ee-a789-134eac3871bf/gvLk0RHJwo.lottie
+          ls -laR
+      - name: Commit
+        run: |
+          git config user.name "Gillani Group"
+          git config user.email "noreply@anthropic.com"
+          git add lottie-src
+          git commit -m "Add downloaded LottieFiles sources" || true
+          git push
