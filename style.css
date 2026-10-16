@@ -309,3 +309,7 @@ h1,h2,h3,.eyebrow,.facts span,.lead,.util-c span{overflow-wrap:break-word;hyphen
 .sec-head>*,.svc>div>*,.split>*>*{min-width:0;max-width:100%}
 h1,h2,h3{overflow-wrap:anywhere}
 .sec-head{min-width:0}
+
+/* safety: after 3.5s always show everything, even if animations were paused */
+.anim-done .hero-text>*,.anim-done svg.emblem .g,.anim-done svg.emblem .loz path{opacity:1!important;transform:none!important;animation:none!important}
+.anim-done svg.emblem .ring1,.anim-done svg.emblem .ring2{stroke-dashoffset:0!important;animation:none!important}

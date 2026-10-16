@@ -35,4 +35,5 @@
     var m=document.querySelector('.form-msg.'+cls+'[data-for="'+key+'"]');
     if(m){m.hidden=false; var f=m.closest("form"); if(f){f.classList.add("in"); f.scrollIntoView({block:"center"});}}
   }
+  setTimeout(function(){document.documentElement.classList.add("anim-done");},3500);
 })();
