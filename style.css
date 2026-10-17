@@ -512,3 +512,4 @@ footer .wrap{position:relative;z-index:1;padding-block:64px 28px;gap:40px}
 @media (min-width:1181px) and (max-width:1320px){.links{gap:18px}.links a{font-size:13px;letter-spacing:.09em}}
 .page-hero.post-hero .hero-text{max-width:900px}
 .page-hero.post-hero h1{font-size:clamp(1.6rem,3.6vw,2.6rem);line-height:1.2}
+.prose h2,.page-hero h1,.post-card h2{hyphens:auto;-webkit-hyphens:auto}
