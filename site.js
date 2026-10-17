@@ -95,7 +95,7 @@
       this.vis=function(v){vis=v;if(!cur){if(v&&!self.started){self.started=1;show(0);}return;}if(calm)return;if(v)cur.a.play();else cur.a.pause();};
     }
     var io=new IntersectionObserver(function(es){es.forEach(function(e){var el=e.target;if(!el._p)el._p=new Player(el);el._p.vis(e.isIntersecting);});},{rootMargin:"150px 0px"});
-    for(var li=0;li<lots.length;li++)io.observe(lots[li]);
+    for(var li=0;li<lots.length;li++){var le=lots[li];if(le.parentNode.classList.contains("hero-show")){le._p=new Player(le);le._p.vis(true);}io.observe(le);}
   }
   setTimeout(function(){document.documentElement.classList.add("anim-done");},3500);
 })();
