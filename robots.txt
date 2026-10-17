@@ -1,5 +1,4 @@
 User-agent: *
-Disallow: /preview/
 Allow: /
 
 Sitemap: https://gillanigroup.eu/sitemap.xml
