@@ -57,7 +57,7 @@
   }
 
   // Lottie scene players: each division plays several scenes in turn (each at least ~12 s)
-  var SEQ={trade:["trade-1","trade-2","trade-3"],fashion:["fashion-1","fashion-2","fashion-3","fashion-4"],recruit:["recruit-1","recruit-2","recruit-3","recruit-4"]};
+  var SEQ={trade:["trade-1","trade-2","trade-3"],fashion:["fashion-1","fashion-2","fashion-3","fashion-4"],recruit:["recruit-1","recruit-2","recruit-3","recruit-4"],hero:["trade-1","fashion-1","recruit-1","trade-2","fashion-3","recruit-3","trade-3","fashion-4","recruit-4","fashion-2","recruit-2"]};
   var lots=document.querySelectorAll(".lot[data-anim]");
   if(lots.length&&"IntersectionObserver" in window&&window.fetch&&window.Promise){
     var sEl=document.querySelector('script[src*="site.js"]'),base=sEl?sEl.src.replace(/site\.js.*$/,""):"";
@@ -71,8 +71,9 @@
       if(w>W*0.2&&h>H*0.2&&(w<W*0.92||h<H*0.92)){var p=Math.max(w,h)*0.04;svg.setAttribute("viewBox",(x1-p)+" "+(y1-p)+" "+(w+2*p)+" "+(h+2*p));}}catch(e){}}
     function Player(el){
       var list=SEQ[el.getAttribute("data-anim")]||[],i=0,cur=null,vis=false,timer=0,self=this,dots=null;
-      if(list.length>1){dots=document.createElement("div");dots.className="lot-dots";list.forEach(function(){dots.appendChild(document.createElement("i"));});el.parentNode.appendChild(dots);}
-      function mark(){if(dots)[].forEach.call(dots.children,function(d,k){d.classList.toggle("on",k===i);});}
+      var hero=el.parentNode.classList.contains("hero-show"),cap=hero?el.parentNode.querySelector(".hero-cap span"):null,labels=hero?(el.parentNode.getAttribute("data-labels")||"").split("|"):[];
+      if(list.length>1&&!hero){dots=document.createElement("div");dots.className="lot-dots";list.forEach(function(){dots.appendChild(document.createElement("i"));});el.parentNode.appendChild(dots);}
+      function mark(){if(cap){var k={trade:0,fashion:1,recruit:2}[list[i].split("-")[0]];if(labels[k]){cap.parentNode.classList.remove("in");void cap.offsetWidth;cap.textContent=labels[k];cap.parentNode.classList.add("in");}}if(dots)[].forEach.call(dots.children,function(d,k){d.classList.toggle("on",k===i);});}
       function show(n){
         Promise.all([getLib(),getData(list[n])]).then(function(v){
           var box=document.createElement("div");box.className="sc";el.appendChild(box);
@@ -84,7 +85,7 @@
             el.parentNode.classList.add("lot-on");
             var old=cur;cur={a:a,box:box,start:Date.now(),played:0};i=n;mark();
             if(old){old.box.classList.remove("on");setTimeout(function(){old.a.destroy();old.box.remove();},800);}
-            if(!calm&&list.length>1){var dur=a.totalFrames/a.frameRate*1000,loops=Math.max(1,Math.ceil(12000/dur));
+            if(!calm&&list.length>1){var dur=a.totalFrames/a.frameRate*1000,loops=Math.max(1,Math.ceil((hero?10000:12000)/dur));
               cur.need=loops;a.addEventListener("loopComplete",function(){if(cur&&cur.a===a&&++cur.played>=cur.need)next();});
               getData(list[(n+1)%list.length]);}
           });
