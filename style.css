@@ -513,3 +513,9 @@ footer .wrap{position:relative;z-index:1;padding-block:64px 28px;gap:40px}
 .page-hero.post-hero .hero-text{max-width:900px}
 .page-hero.post-hero h1{font-size:clamp(1.6rem,3.6vw,2.6rem);line-height:1.2}
 .prose h2,.page-hero h1,.post-card h2{hyphens:auto;-webkit-hyphens:auto}
+.prose a{color:var(--green);text-decoration:underline;text-decoration-color:rgba(163,126,44,.6);text-underline-offset:3px;text-decoration-thickness:1px}
+.prose a:hover{color:var(--gold-text);text-decoration-color:var(--gold)}
+.prose a[target="_blank"]::after{content:"↗";font-size:.75em;margin-left:2px;color:var(--gold-text)}
+.prose .refs{margin-top:8px;padding-left:22px;font-size:.92rem;border-top:1px solid var(--line);padding-top:14px}
+.prose .refs li{margin-bottom:8px;color:var(--muted);overflow-wrap:anywhere}
+.prose .post-meta a::after{content:none}
