@@ -57,7 +57,7 @@
   }
 
   // Lottie scene players: each division plays several scenes in turn (each at least ~12 s)
-  var SEQ={trade:["trade-1","trade-2","trade-3"],fashion:["fashion-1","fashion-2","fashion-3","fashion-4"],recruit:["recruit-1","recruit-2","recruit-3","recruit-4"],hero:["trade-1","fashion-1","recruit-1","trade-2","fashion-3","recruit-3","trade-3","fashion-4","recruit-4","fashion-2","recruit-2"]};
+  var SEQ={trade:["trade-1","trade-2","trade-3"],fashion:["fashion-1","fashion-2","fashion-3","fashion-4"],recruit:["recruit-1","recruit-2","recruit-3","recruit-4"],hero:["trade-3","fashion-1","recruit-1","trade-2","fashion-3","recruit-3","trade-1","fashion-4","recruit-4","fashion-2","recruit-2"]};
   var lots=document.querySelectorAll(".lot[data-anim]");
   if(lots.length&&"IntersectionObserver" in window&&window.fetch&&window.Promise){
     var sEl=document.querySelector('script[src*="site.js"]'),base=sEl?sEl.src.replace(/site\.js.*$/,""):"";
