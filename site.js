@@ -60,10 +60,10 @@
   var SEQ={trade:["trade-1","trade-2","trade-3"],fashion:["fashion-1","fashion-2","fashion-3","fashion-4"],recruit:["recruit-1"],hero:["trade-3","fashion-1","recruit-1","trade-2","fashion-3","recruit-1","trade-1","fashion-4","recruit-1","fashion-2"]};
   var lots=document.querySelectorAll(".lot[data-anim]");
   if(lots.length&&"IntersectionObserver" in window&&window.fetch&&window.Promise){
-    var sEl=document.querySelector('script[src*="site.js"]'),base=sEl?sEl.src.replace(/site\.js.*$/,""):"";
+    var sEl=document.querySelector('script[src*="site.js"]'),base=sEl?sEl.src.replace(/site\.js.*$/,""):"";var qv=sEl&&sEl.src.indexOf("?")>0?sEl.src.slice(sEl.src.indexOf("?")):"";
     var calm=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches,lib=null,cache={};
-    function getLib(){if(lib)return lib;lib=new Promise(function(ok,no){var s=document.createElement("script");s.src=base+"assets/js/lottie_light.min.js";s.onload=function(){ok(window.lottie)};s.onerror=no;document.head.appendChild(s);});return lib;}
-    function getData(n){if(!cache[n])cache[n]=new Promise(function(ok,no){var L=window.__LOT||{};if(L[n])return ok(L[n]);var s=document.createElement("script");s.src=base+"assets/anim/"+n+".js";s.onload=function(){var d=(window.__LOT||{})[n];d?ok(d):no();};s.onerror=no;document.head.appendChild(s);});return cache[n];}
+    function getLib(){if(lib)return lib;lib=new Promise(function(ok,no){var s=document.createElement("script");s.src=base+"assets/js/lottie_light.min.js"+qv;s.onload=function(){ok(window.lottie)};s.onerror=no;document.head.appendChild(s);});return lib;}
+    function getData(n){if(!cache[n])cache[n]=new Promise(function(ok,no){var L=window.__LOT||{};if(L[n])return ok(L[n]);var s=document.createElement("script");s.src=base+"assets/anim/"+n+".js"+qv;s.onload=function(){var d=(window.__LOT||{})[n];d?ok(d):no();};s.onerror=no;document.head.appendChild(s);});return cache[n];}
     function fit(a,box){try{var svg=box.querySelector("svg");if(!svg)return;var g=svg.querySelector("g"),x1=1e9,y1=1e9,x2=-1e9,y2=-1e9,n=8,cur=a.currentFrame;
       for(var k=0;k<n;k++){a.goToAndStop(Math.floor(a.totalFrames*k/n),true);var b=g.getBBox();if(b.width>0&&b.height>0){x1=Math.min(x1,b.x);y1=Math.min(y1,b.y);x2=Math.max(x2,b.x+b.width);y2=Math.max(y2,b.y+b.height);}}
       a.goToAndStop(cur,true);var vb=svg.viewBox.baseVal,W=vb.width,H=vb.height;
