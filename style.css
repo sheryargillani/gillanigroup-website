@@ -521,3 +521,10 @@ footer .wrap{position:relative;z-index:1;padding-block:64px 28px;gap:40px}
 .prose .post-meta a::after{content:none}
 .post-update{margin:0 0 26px;padding:16px 18px;border-left:4px solid var(--gold);background:#FBF6E8;color:var(--ink);font-size:.98rem;line-height:1.6}
 .post-update strong{color:var(--green)}
+
+.post-card a{padding:0;overflow:hidden}
+.post-card .pc-img{display:block;width:100%;height:auto;aspect-ratio:1200/630;object-fit:cover;border-bottom:1px solid var(--line)}
+.post-card a>.pc-top,.post-card a>h2,.post-card a>p,.post-card a>.more{margin-inline:26px}
+.post-card a>.pc-top{margin-top:22px}.post-card a>.more{margin-bottom:24px}
+.post-feat{margin:0 0 28px}.post-feat img{display:block;width:100%;height:auto;border:1px solid var(--line)}
+@media (max-width:600px){.post-card a>.pc-top,.post-card a>h2,.post-card a>p,.post-card a>.more{margin-inline:20px}}
