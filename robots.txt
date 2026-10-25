@@ -31,3 +31,4 @@ User-agent: CCBot
 Allow: /
 
 Sitemap: https://gillanigroup.eu/sitemap.xml
+Sitemap: https://gillanigroup.eu/sitemap.txt
